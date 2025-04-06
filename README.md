@@ -1,97 +1,38 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+### Quickstart
 
-# Getting Started
+Assuming you have the correct tools and runtimes preinstalled simply run `yarn ios` or `npm run ios`.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+### Installing runtimes and tools
 
-## Step 1: Start Metro
+React Native projects can be a little finnicky to work with and get running and so the project has the correct runtimes and tools pinned using [mise](https://mise.jdx.dev/getting-started.html), a runtime and tool management tool. Upon installing mise you can run `mise i` to install the correct versions of Node, Ruby, Cocoapods and Java.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### Installing dependencies
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+You can install the project dependencies using `yarn install` or `npm install`. A postinstall script should automatically install the pods required to launch the iOS app.
 
-```sh
-# Using npm
-npm start
+### Starting the app
 
-# OR using Yarn
-yarn start
-```
+You can run the app using `yarn ios` or `npm run ios`
 
-## Step 2: Build and run your app
+### Notes
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+The app is a simple React Native app without any external dependencies (although for a real project it would definitely need some). It shows a home/welcome screen that navigates to the consultation questions screen where a user can enter in their answers to a series of 5 questions each shown only upon a successfuly entry of the previous question. The user can navigate back through the list of questions and can then amend their answers.The results are logged to the console (since this is using the latest version of React Native remember that logs have now moved to the browser! Upon running the metro bundler press `j` to launch the dev tools in the browser.)
 
-### Android
+A paginated scrollview was chosen as the medium to show the questions as it gives a nice animation effect to the user as they answer the questions and evokes feelings of progress.
+The answers are stored in a ref object as there is no reason to use state to update the UI. Many complaints about the slowness of React Native are due to engineers over using state updates when they aren't necessary. If nothing on screen needs to update then it doesn't need to be held in state. Following good programming practices and understanding the rendering cycle of React is something I feel necessary for a good React Native application given that there are many devices that need supporting and not all of them have the computational power of the latest and greatest flagships.
 
-```sh
-# Using npm
-npm run android
+I've structured the repo such that the source code lives in `/src` with a directory each for the logically relevant parts of the app. I'm not a fan of the atomic structure used in some codebases and think it can easily become unwieldy as each engineer has legitimate differing opinions as to what constitutes an atom/molecule/organism and it can make things trickier to find. As such the components live in `components/` each component is then in turn in its own directory where the styling code lives in its own file for better cleanliness and clarity of the logic required for the component in the `.tsx` file. I didn't have time to add tests but this is also where tests would live following the convention `ComponentName.test.tsx`.
 
-# OR using Yarn
-yarn android
-```
+Other directories include `screens/` where components are imported to create a functional screen. Any screen specific components would live in the screen directory. If it's more generic it would live in `components/`. The `api/` directory is where the api client and http request functions would live. I'd probably use axios and react-query for data-fetching and posting. Any auth tokens would be attached using axios interceptors and retrieved from the local keychain/keystore using react-native-keychain. Any assets would live in `assets/` in their relevant subdirectory, e.g. `images/` for images `audio/` for audio files etc.
 
-### iOS
+I used bare React Native as it's what I'm more used to and feel quicker using it, but Expo would be my choice for a greenfield app given its support and the majority of the community now using it as the framework of choice for RN it would mean we have access to resources for debugging obscure bugs as well as a responsive team that is actively fixing issues in addition to the issues and stack overflow threads.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+React navigation would be my choice of library for navigation (although for this simple project I simply used a piece of state to mock navigation). Since Android 15 there are some issues surrounding edge-to-edge and the app not respecting safe-areas (such as the camera notch). I didn't install it for this so as to keep things light, but would use react-native-edge-to-edge to handle Android layout better.
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+I ultimately ended up running out of time but would have liked to include some testing with Jest and react native testing library. I would also have liked to encapsulate the logic from the views a bit better and move them into a hook that would expose the necessary functionality for the screen e.g. `useConsultationQuestions.ts`.
 
-```sh
-bundle install
-```
+In a real project I'd also set up more thorough linting rules to keep the codebase healthy and ensure standards. I feel that having agreed upon standards is a good method for ensuring readability between engineers and also reducing bugs.
 
-Then, and every time you update your native dependencies, run:
+Global state management was not necessary here but I'd probably opt for something like Zustand or Jotai to handle that. Using popular and well supported libraries ensures you have a wider pool of workers that can settle in comfortably more quickly.
 
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+I've included a video of the running app below:
