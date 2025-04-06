@@ -1,7 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  text: {
-    fontSize: 18,
+  wrapper: {
+    rowGap: 10,
+  },
+  questionSlide: {
+    rowGap: 15,
   },
 });
