@@ -1,7 +1,7 @@
-import { View } from 'react-native';
+import { Questions } from './screens/Questions';
 
 function App() {
-  return <View />;
+  return <Questions />;
 }
 
 export default App;
