@@ -1,11 +1,23 @@
+import { useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native';
-import { Questions } from './screens/Questions';
 import { styles } from './App.style';
+import { Header } from './components/Header/Header';
+import { Welcome } from './screens/Welcome/Welcome';
+import { ConsultationQuestions } from './screens/ConsultationQuestions/ConsultationQuestions';
+import type { Screens } from './types/navigation';
 
 function App() {
+  const [screen, setScreen] = useState<Screens>('welcome');
+  const navToConsultationQuestions = useCallback(() => {
+    setScreen('consultation-questions');
+  }, []);
   return (
     <SafeAreaView style={styles.appWrapper}>
-      <Questions />
+      <Header />
+      {screen === 'welcome' && (
+        <Welcome navToConsultationQuestions={navToConsultationQuestions} />
+      )}
+      {screen === 'consultation-questions' && <ConsultationQuestions />}
     </SafeAreaView>
   );
 }

@@ -1,12 +1,12 @@
 import { Alert, useWindowDimensions, View } from 'react-native';
-import { Title } from '../components/Title/Title';
-import type { Question } from '../types/question';
-import { styles } from './Questions.style';
-import { Text } from '../components/Text/Text';
-import { SelectionBox } from '../components/SelectionBox/SelectionBox';
+import { Title } from '../../components/Title/Title';
+import type { Question } from '../../types/question';
+import { styles } from './ConsultationQuestions.style';
+import { Text } from '../../components/Text/Text';
+import { SelectionBox } from '../../components/SelectionBox/SelectionBox';
 import { useCallback, useMemo } from 'react';
-import { SCREEN_PADDING } from '../constants/screen-padding';
-import { Button } from '../components/Button/Button';
+import { SCREEN_PADDING } from '../../constants/screen-padding';
+import { Button } from '../../components/Button/Button';
 
 export type QuestionAnswer = {
   questionText: string;
@@ -23,9 +23,9 @@ type Props = {
   submitAnswers: () => void;
 };
 
-const DELAY = 100;
+const DELAY = 150;
 
-export const QuestionSlide = ({
+export const ConsultationQuestionSlide = ({
   question,
   storeAnswer,
   scrollTo,
