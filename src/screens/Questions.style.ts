@@ -7,4 +7,7 @@ export const styles = StyleSheet.create({
   questionSlide: {
     rowGap: 15,
   },
+  spacer: {
+    flex: 1,
+  },
 });
