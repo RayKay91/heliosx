@@ -20,6 +20,7 @@ export const SelectionBox = ({ options }: Props) => {
 
   const handlePress = (option: SelectionBoxOption) => {
     setSelectedOption(option);
+    option.onPress?.();
   };
 
   return (
