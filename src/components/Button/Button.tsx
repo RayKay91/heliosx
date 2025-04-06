@@ -23,8 +23,14 @@ export const Button = ({ children, ...props }: Props) => {
   }, []);
 
   return (
-    <Pressable style={getStyles} {...props}>
-      <Text style={styles.text}>{children}</Text>
+    <Pressable disabled={props.disabled} style={getStyles} {...props}>
+      <Text
+        style={[
+          styles.text,
+          props.disabled && { color: theme.light.disabledText },
+        ]}>
+        {children}
+      </Text>
     </Pressable>
   );
 };

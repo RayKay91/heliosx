@@ -13,5 +13,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     color: theme.light.surfaceRegular,
+    fontSize: 18,
+    fontWeight: '600',
   },
 });

@@ -8,6 +8,8 @@ export const theme = {
     surfaceRegular: 'rgb(238,240,249)',
     white: 'rgb(255, 255, 255)',
     black: 'rgb(0, 0, 0)',
+    disabled: 'rgb(189, 189, 189)',
+    disabledText: 'rgb(100,100,100)',
   },
   // @todo implement dark mode theme dark: {},
 };
