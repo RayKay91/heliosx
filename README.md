@@ -36,3 +36,7 @@ In a real project I'd also set up more thorough linting rules to keep the codeba
 Global state management was not necessary here but I'd probably opt for something like Zustand or Jotai to handle that. Using popular and well supported libraries ensures you have a wider pool of workers that can settle in comfortably more quickly.
 
 I've included a video of the running app below:
+
+https://github.com/user-attachments/assets/25a12a64-29f5-418d-8c86-ce2e67f9c69e
+
+
